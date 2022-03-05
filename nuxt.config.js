@@ -49,7 +49,7 @@ export default {
     build: {},
 
     env: {
-        apiUrl: process.env.API_URL || 'http://localhost:3001'
+        apiUrl: process.env.API_URL || 'https://api.imap.fi'
     },
 
     target: 'static'
