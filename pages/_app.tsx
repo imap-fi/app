@@ -49,7 +49,7 @@ export default function App(props: AppProps) {
           }}
         >
           <NotificationsProvider>
-            <AppShell header={<Header tabs={['hello', 'moi', 'tervehdys']} />}>
+            <AppShell header={<Header tabs={['Koti', 'UKK', 'Tili']} />}>
               <Component {...pageProps} />
             </AppShell>
           </NotificationsProvider>
