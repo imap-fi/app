@@ -10,7 +10,8 @@ import {
   Title,
 } from '@mantine/core';
 import type { NextPage } from 'next';
-import { Check } from 'tabler-icons-react';
+import { useRouter } from 'next/router';
+import { BrandGithub, Check } from 'tabler-icons-react';
 import image from '../public/image.svg';
 
 const useStyles = createStyles((theme) => ({
@@ -81,6 +82,8 @@ const useStyles = createStyles((theme) => ({
 
 const Home: NextPage = () => {
   const { classes } = useStyles();
+  const router = useRouter();
+
   return (
     <div>
       <Container>
@@ -131,6 +134,8 @@ const Home: NextPage = () => {
                 radius="xl"
                 size="md"
                 className={classes.control}
+                leftIcon={<BrandGithub />}
+                onClick={() => router.push('https://github.com/imap-fi')}
               >
                 Lähdekoodi
               </Button>
