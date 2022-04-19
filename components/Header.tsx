@@ -1,6 +1,7 @@
 import { Burger, Container, createStyles, Group, Tabs } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
 import UserButton from './UserButton';
 
 const useStyles = createStyles((theme) => ({
@@ -39,7 +40,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   burger: {
-    [theme.fn.largerThan('xs')]: {
+    [theme.fn.largerThan('sm')]: {
       display: 'none',
     },
   },
@@ -101,12 +102,16 @@ export function Header({ tabs }: HeaderProps) {
             size="sm"
           />
 
-          <UserButton
-            user={{
-              name: 'Midka',
-              image: 'https://avatars.dicebear.com/api/bottts/Midka.svg',
-            }}
-          />
+          <Group>
+            <UserButton
+              user={{
+                name: 'Midka',
+                image: 'https://avatars.dicebear.com/api/bottts/Midka.svg',
+              }}
+            />
+
+            <ThemeToggle />
+          </Group>
         </Group>
       </Container>
       <Container>

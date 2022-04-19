@@ -16,7 +16,7 @@ const ColorSchemeToggle = () => {
     >
       <ActionIcon
         onClick={() => toggleColorScheme()}
-        size="xl"
+        size="lg"
         sx={(theme) => ({
           color:
             theme.colorScheme === 'dark'
@@ -24,7 +24,7 @@ const ColorSchemeToggle = () => {
               : theme.colors.blue[6],
         })}
       >
-        {colorScheme === 'dark' ? <Sun size={24} /> : <MoonStars size={24} />}
+        {colorScheme === 'dark' ? <Sun size={18} /> : <MoonStars size={18} />}
       </ActionIcon>
     </motion.div>
   );

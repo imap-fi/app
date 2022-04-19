@@ -1,4 +1,5 @@
 import {
+  AppShell,
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider,
@@ -48,8 +49,9 @@ export default function App(props: AppProps) {
           }}
         >
           <NotificationsProvider>
-            <Header tabs={['hello', 'hello2']} />
-            <Component {...pageProps} />
+            <AppShell header={<Header tabs={['hello', 'moi', 'tervehdys']} />}>
+              <Component {...pageProps} />
+            </AppShell>
           </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
