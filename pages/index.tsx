@@ -66,6 +66,17 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.sm,
     padding: '4px 12px',
   },
+
+  highlight2: {
+    position: 'relative',
+    backgroundColor:
+      theme.colorScheme === 'dark'
+        ? theme.fn.rgba(theme.colors[theme.primaryColor][6], 0.55)
+        : theme.colors[theme.primaryColor][0],
+    borderRadius: theme.radius.sm,
+    padding: '4px 12px',
+    color: theme.colors[theme.primaryColor][0],
+  },
 }));
 
 const Home: NextPage = () => {
@@ -80,9 +91,11 @@ const Home: NextPage = () => {
               <br /> palvelu
             </Title>
             <Text color="dimmed" mt="md">
-              Build fully functional accessible web applications faster than
-              ever – Mantine includes more than 120 customizable components and
-              hooks to cover you in any situation
+              Tämä on imap.fi. Kyseessä on harrastuksena ylläpidetty sähköposti.
+              Jos harrastuspohjainen toiminta huolettaa, voit katsoa palvelimien
+              yhtäjaksoisen päälläoloajan. Tarjoamme kaikille käyttäjille 512 Mt
+              tallennustilaa. Rekisteröidy{' '}
+              <span className={classes.highlight2}>ilmaiseksi</span>
             </Text>
 
             <List
@@ -96,22 +109,22 @@ const Home: NextPage = () => {
               }
             >
               <List.Item>
-                <b>TypeScript based</b> – build type safe applications, all
-                components and hooks export types
+                <b>512Mt ilmaista tilaa</b> – säästä monet sähköpostit ja niiden
+                kuvat ilmaiseksi
               </List.Item>
               <List.Item>
-                <b>Free and open source</b> – all packages have MIT license, you
-                can use Mantine in any project
+                <b>Avoin lähdekoodi</b> – täydellinen, avoimen lähdekoodin
+                palvelu
               </List.Item>
               <List.Item>
-                <b>No annoying focus ring</b> – focus ring will appear only when
-                user navigates with keyboard
+                <b>IMAP/POP3 protokollat</b> – lisää sähköpostisi valitsemaasi
+                palveluun (Gmail, Outlook)
               </List.Item>
             </List>
 
             <Group mt={30}>
               <Button radius="xl" size="md" className={classes.control}>
-                Get started
+                Rekisteröidy
               </Button>
               <Button
                 variant="default"
@@ -119,7 +132,7 @@ const Home: NextPage = () => {
                 size="md"
                 className={classes.control}
               >
-                Source code
+                Lähdekoodi
               </Button>
             </Group>
           </div>
