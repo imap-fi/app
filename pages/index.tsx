@@ -76,8 +76,8 @@ const Home: NextPage = () => {
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              A <span className={classes.highlight}>modern</span> React <br />{' '}
-              components library
+              Uusi, <span className={classes.highlight}>moderni</span>{' '}
+              sähköposti <br /> palvelu
             </Title>
             <Text color="dimmed" mt="md">
               Build fully functional accessible web applications faster than
