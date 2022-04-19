@@ -106,7 +106,7 @@ export function Header({ tabs }: HeaderProps) {
     if (!tab) return;
 
     setActiveTab(tabs.indexOf(tab));
-  }, []);
+  }, [router.asPath]);
 
   const handleTabChange = (active: number, tabKey: string) => {
     setActiveTab(active);

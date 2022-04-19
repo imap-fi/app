@@ -8,7 +8,15 @@ import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Home, QuestionMark } from 'tabler-icons-react';
 import { Header } from '../components/Header';
+import { Tab } from '../utils/types';
+
+const tabs: Tab[] = [
+  { name: 'Koti', link: '/', icon: <Home /> },
+  { name: 'UKK', link: '/usein-kysytyt-kysymykset', icon: <QuestionMark /> },
+  { name: 'Tili', link: '/account' },
+];
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -49,17 +57,7 @@ export default function App(props: AppProps) {
           }}
         >
           <NotificationsProvider>
-            <AppShell
-              header={
-                <Header
-                  tabs={[
-                    { name: 'Koti', link: '/' },
-                    { name: 'UKK', link: '/usein-kysytyt-kysymykset' },
-                    { name: 'Tili', link: '/account' },
-                  ]}
-                />
-              }
-            >
+            <AppShell header={<Header tabs={tabs} />}>
               <Component {...pageProps} />
             </AppShell>
           </NotificationsProvider>
