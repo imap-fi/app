@@ -1,5 +1,8 @@
 import { Burger, Container, createStyles, Group, Tabs } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Tab } from '../utils/types';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import UserButton from './UserButton';
@@ -79,14 +82,36 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderProps {
-  tabs: string[];
+  tabs: Tab[];
 }
 
 export function Header({ tabs }: HeaderProps) {
   const { classes } = useStyles();
   const [opened, toggleOpened] = useBooleanToggle(false);
+  const [activeTab, setActiveTab] = useState(0);
+  const router = useRouter();
 
-  const items = tabs.map((tab) => <Tabs.Tab label={tab} key={tab} />);
+  const items = tabs.map((tab) => (
+    <Tabs.Tab
+      label={tab.name}
+      key={tab.link}
+      tabKey={tab.link}
+      icon={tab.icon}
+    />
+  ));
+
+  useEffect(() => {
+    // get the active tab, if site was refreshed
+    const tab = tabs.find((t) => t.link === router.asPath);
+    if (!tab) return;
+
+    setActiveTab(tabs.indexOf(tab));
+  }, []);
+
+  const handleTabChange = (active: number, tabKey: string) => {
+    setActiveTab(active);
+    router.push(tabKey);
+  };
 
   return (
     <div className={classes.header}>
@@ -94,14 +119,14 @@ export function Header({ tabs }: HeaderProps) {
         <Group position="apart">
           <Logo />
 
-          <Burger
-            opened={opened}
-            onClick={() => toggleOpened()}
-            className={classes.burger}
-            size="sm"
-          />
-
           <Group>
+            <Burger
+              opened={opened}
+              onClick={() => toggleOpened()}
+              className={classes.burger}
+              size="sm"
+            />
+
             <UserButton
               user={{
                 name: 'Midka',
@@ -122,6 +147,9 @@ export function Header({ tabs }: HeaderProps) {
             tabControl: classes.tabControl,
             tabActive: classes.tabControlActive,
           }}
+          position="center"
+          active={activeTab}
+          onTabChange={handleTabChange}
         >
           {items}
         </Tabs>

@@ -49,7 +49,17 @@ export default function App(props: AppProps) {
           }}
         >
           <NotificationsProvider>
-            <AppShell header={<Header tabs={['Koti', 'UKK', 'Tili']} />}>
+            <AppShell
+              header={
+                <Header
+                  tabs={[
+                    { name: 'Koti', link: '/' },
+                    { name: 'UKK', link: '/usein-kysytyt-kysymykset' },
+                    { name: 'Tili', link: '/account' },
+                  ]}
+                />
+              }
+            >
               <Component {...pageProps} />
             </AppShell>
           </NotificationsProvider>
