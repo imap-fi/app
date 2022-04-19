@@ -27,7 +27,7 @@
                 <input
                   v-model="user"
                   type="text"
-                  placeholder="matti"
+                  placeholder="matti.lattu"
                   required
                   class="input input-bordered input-md"
                 />
