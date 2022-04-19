@@ -7,6 +7,7 @@ import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Header } from '../components/Header';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -47,6 +48,7 @@ export default function App(props: AppProps) {
           }}
         >
           <NotificationsProvider>
+            <Header tabs={['hello', 'hello2']} />
             <Component {...pageProps} />
           </NotificationsProvider>
         </MantineProvider>
