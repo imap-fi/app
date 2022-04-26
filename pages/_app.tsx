@@ -15,7 +15,6 @@ import { Tab } from '../utils/types';
 const tabs: Tab[] = [
   { name: 'Koti', link: '/', icon: <Home /> },
   { name: 'UKK', link: '/usein-kysytyt-kysymykset', icon: <QuestionMark /> },
-  { name: 'Tili', link: '/account' },
 ];
 
 export default function App(props: AppProps) {
