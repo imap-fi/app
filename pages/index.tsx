@@ -89,15 +89,14 @@ const Home: NextPage = () => {
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              Uusi <span className={classes.highlight}>moderni</span> sähköposti{' '}
-              <br /> palvelu
+              Uusi, <span className={classes.highlight}>moderni</span>{' '}
+              sähköpostipalvelu
             </Title>
             <Text color="dimmed" mt="md">
               Tämä on imap.fi. Kyseessä on harrastuksena ylläpidetty sähköposti.
               Jos harrastuspohjainen toiminta huolettaa, voit katsoa palvelimien
               yhtäjaksoisen päälläoloajan. Tarjoamme kaikille käyttäjille 512 Mt
-              tallennustilaa. Rekisteröidy{' '}
-              <span className={classes.highlight2}>ilmaiseksi</span>
+              tallennustilaa. Rekisteröidy ilmaiseksi
             </Text>
 
             <List
