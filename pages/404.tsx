@@ -7,11 +7,19 @@ import {
   Title,
 } from '@mantine/core';
 import { useRouter } from 'next/router';
+import NotFoundVector from '../vectors/not-found.svg';
 
 const useStyles = createStyles((theme) => ({
   root: {
     paddingTop: 80,
     paddingBottom: 80,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  vector: {
+    width: '50%',
+    marginBottom: theme.spacing.md,
   },
 
   label: {
@@ -55,7 +63,9 @@ export default function ErrorPage() {
 
   return (
     <Container className={classes.root}>
-      <div className={classes.label}>404</div>
+      <div className={classes.vector}>
+        <NotFoundVector />
+      </div>
       <Title className={classes.title}>You have found a secret place.</Title>
       <Text
         color="dimmed"

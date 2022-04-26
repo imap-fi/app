@@ -3,7 +3,6 @@ import {
   Container,
   createStyles,
   Group,
-  Image,
   List,
   Text,
   ThemeIcon,
@@ -12,7 +11,7 @@ import {
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { BrandGithub, Check } from 'tabler-icons-react';
-import image from '../public/image.svg';
+import Graphic from '../vectors/image.svg';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -141,11 +140,12 @@ const Home: NextPage = () => {
               </Button>
             </Group>
           </div>
-          <Image
+          {/* <Image
             src={image.src}
             className={classes.image}
             alt="cool graphics"
-          />
+          /> */}
+          <Graphic />
         </div>
       </Container>
     </div>
