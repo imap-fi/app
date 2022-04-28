@@ -6,6 +6,7 @@ import {
 } from '@mantine/core';
 import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
+import { SessionProvider } from 'next-auth/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Home, QuestionMark } from 'tabler-icons-react';
@@ -18,7 +19,10 @@ const tabs: Tab[] = [
 ];
 
 export default function App(props: AppProps) {
-  const { Component, pageProps } = props;
+  const {
+    Component,
+    pageProps: { session, ...pageProps },
+  } = props;
 
   // Color scheme
   const preferredColorScheme = useColorScheme();
@@ -43,25 +47,27 @@ export default function App(props: AppProps) {
         />
       </Head>
 
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
-      >
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            /** Put your mantine theme override here */
-            colorScheme,
-          }}
+      <SessionProvider session={session}>
+        <ColorSchemeProvider
+          colorScheme={colorScheme}
+          toggleColorScheme={toggleColorScheme}
         >
-          <NotificationsProvider>
-            <AppShell header={<Header tabs={tabs} />}>
-              <Component {...pageProps} />
-            </AppShell>
-          </NotificationsProvider>
-        </MantineProvider>
-      </ColorSchemeProvider>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+              /** Put your mantine theme override here */
+              colorScheme,
+            }}
+          >
+            <NotificationsProvider>
+              <AppShell header={<Header tabs={tabs} />}>
+                <Component {...pageProps} />
+              </AppShell>
+            </NotificationsProvider>
+          </MantineProvider>
+        </ColorSchemeProvider>
+      </SessionProvider>
     </>
   );
 }

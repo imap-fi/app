@@ -1,5 +1,6 @@
 import { Burger, Container, createStyles, Group, Tabs } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Tab } from '../utils/types';
@@ -90,6 +91,7 @@ export function Header({ tabs }: HeaderProps) {
   const [opened, toggleOpened] = useBooleanToggle(false);
   const [activeTab, setActiveTab] = useState(0);
   const router = useRouter();
+  const { data } = useSession();
 
   const items = tabs.map((tab) => (
     <Tabs.Tab
@@ -126,6 +128,8 @@ export function Header({ tabs }: HeaderProps) {
               className={classes.burger}
               size="sm"
             />
+
+            {data?.expires}
 
             <UserButton
               user={{
