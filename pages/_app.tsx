@@ -9,13 +9,14 @@ import { NotificationsProvider } from '@mantine/notifications';
 import { SessionProvider } from 'next-auth/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Home, QuestionMark } from 'tabler-icons-react';
+import { Home, QuestionMark, User } from 'tabler-icons-react';
 import { Header } from '../components/Header';
 import { Tab } from '../utils/types';
 
 const tabs: Tab[] = [
   { name: 'Koti', link: '/', icon: <Home /> },
   { name: 'UKK', link: '/usein-kysytyt-kysymykset', icon: <QuestionMark /> },
+  { name: 'Profiili', link: '/profile', icon: <User /> },
 ];
 
 export default function App(props: AppProps) {

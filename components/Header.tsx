@@ -129,14 +129,7 @@ export function Header({ tabs }: HeaderProps) {
               size="sm"
             />
 
-            {data?.expires}
-
-            <UserButton
-              user={{
-                name: 'Midka',
-                image: 'https://avatars.dicebear.com/api/bottts/Midka.svg',
-              }}
-            />
+            <UserButton />
 
             <ThemeToggle />
           </Group>

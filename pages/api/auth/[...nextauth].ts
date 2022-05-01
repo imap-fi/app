@@ -21,7 +21,7 @@ export default NextAuth({
         const { password, email } = credentials;
         const modifiedEmail = email.replace('@imap.fi', '');
 
-        const res = await fetch(API_URL('/auth'), {
+        const { token, success } = await fetch(API_URL('auth'), {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -31,34 +31,27 @@ export default NextAuth({
             email: modifiedEmail,
             password: password,
           }),
-        });
+        }).then((res) => res.json());
 
-        console.log('res', res);
-
-        const { token, success } = await res.json();
-
-        console.log('token', token);
-        console.log('success', success);
-
-        if (!success) return null;
+        if (!success) throw new Error('Invalid Credentials');
 
         // get user info
 
-        const userData = await fetch(API_URL('/account?email=' + email), {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const userData = await fetch(
+          API_URL('account?email=' + modifiedEmail),
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-        if (!userData.ok) {
-          return null;
-        }
+        if (!userData.ok) throw new Error("Couldn't get user data");
 
         const user = await userData.json();
-        console.log(user);
 
         return {
           token,
@@ -67,8 +60,21 @@ export default NextAuth({
       },
     }),
   ],
-  pages: {
-    signIn: '/auth/login',
-    error: '/auth/error',
+  session: {
+    // Choose how you want to save the user session.
+    // The default is `"jwt"`, an encrypted JWT (JWE) stored in the session cookie.
+    // If you use an `adapter` however, we default it to `"database"` instead.
+    // You can still force a JWT session by explicitly defining `"jwt"`.
+    // When using `"database"`, the session cookie will only contain a `sessionToken` value,
+    // which is used to look up the session in the database.
+    strategy: 'database',
+
+    // Seconds - How long until an idle session expires and is no longer valid.
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+
+    // Seconds - Throttle how frequently to write to database to extend a session.
+    // Use it to limit write operations. Set to 0 to always update the database.
+    // Note: This option is ignored if using JSON Web Tokens
+    updateAge: 24 * 60 * 60, // 24 hours
   },
 });

@@ -11,9 +11,12 @@ import {
   Title,
 } from '@mantine/core';
 import { useForm } from '@mantine/hooks';
+import { showNotification } from '@mantine/notifications';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const LoginScreen = () => {
+  const router = useRouter();
   const form = useForm({
     initialValues: {
       email: '',
@@ -23,9 +26,37 @@ const LoginScreen = () => {
 
   type FormValues = typeof form.values;
 
-  const handleSubmit = (values: FormValues) => {
-    console.log(values);
-    signIn('credentials', { email: values.email, password: values.password });
+  const handleSubmit = async (values: FormValues) => {
+    const res = (await signIn('credentials', {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+    })) as unknown as {
+      error?: unknown;
+      ok: boolean;
+      status: number;
+      url?: string | null;
+    };
+
+    if (!res) return;
+
+    if (res.error) {
+      showNotification({
+        title: `Failure`,
+        color: 'red',
+        message: String(res.error || 'Unknown error'),
+      });
+    } else {
+      showNotification({
+        title: `Success`,
+        color: 'green',
+        message: `You successfully logged in`,
+      });
+
+      router.push('/profile');
+    }
+
+    console.log(res);
   };
 
   return (

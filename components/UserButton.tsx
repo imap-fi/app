@@ -7,6 +7,7 @@ import {
   Text,
   UnstyledButton,
 } from '@mantine/core';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   ChevronDown,
@@ -19,11 +20,8 @@ import {
   SwitchHorizontal,
   Trash,
 } from 'tabler-icons-react';
-import { User } from '../utils/types';
 
-type Props = {
-  user: User;
-};
+type Props = {};
 
 const useStyles = createStyles((theme) => ({
   userMenu: {
@@ -50,9 +48,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const UserButton = ({ user }: Props) => {
+const UserButton = ({}: Props) => {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const { classes, cx, theme } = useStyles();
+  const { data } = useSession();
+
+  if (!data?.user?.mailBox) {
+    return <div>not logged in</div>;
+  }
 
   return (
     <Menu
@@ -69,9 +72,14 @@ const UserButton = ({ user }: Props) => {
           })}
         >
           <Group spacing={7}>
-            <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
+            <Avatar
+              src={`https://avatars.dicebear.com/api/bottts/${data.user.mailBox.username}.svg`}
+              alt={data.user.mailBox.name}
+              radius="xl"
+              size={20}
+            />
             <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-              {user.name}
+              {data.user.mailBox.name}
             </Text>
             <ChevronDown size={12} />
           </Group>
